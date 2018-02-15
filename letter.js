@@ -1,25 +1,24 @@
-//letter constructor to start building a word object.
-function NewLetter(letter, bool) {
-    this.letter = letter; //string value to contain a letter char.
-    this.bool = false; //set to false for if letter is not guessed.
+var Letter = function(letter) {
+    this.letter = letter;
+    this.guessed = false;
+    this.space = false;
 }
 
-/*check the characgter and if it's already guessed display "_" or
-    if yas yet to be guessed*/
-NewLetter.prototype.Underlaying = function(guessed) {
-    this.guessed = function() {
-        if (this.bool === false) {
-            //have the letter show up as "_"
-            this.letter = "_";
-        }
-    };
+Letter.prototype.stringify = function(){
+    var letter = "_";
+    if (this.letter === " "){
+        this.space = true;
+        this.guessed = true;
+    }
+    if (this.guessed){
+        return this.letter
+    }
+    return letter;
 }
 
-/*takes a character as an argument then checks it against the Underlying
-    character, updating the stored boolean val to true if correctly guessed */
-NewLetter.prototype.CharCheck = function(letter) {
-    if (letter === letter) {
-        this.bool = true;
+Letter.prototype.userGuess = function(){
+    if (userGuess === this.letter){
+        this.guessed = true;
     }
 }
 
