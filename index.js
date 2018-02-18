@@ -2,28 +2,14 @@
 var Word = require('./word.js');
 var inquirer = require('inquirer');
 
-//Global variables
+//Variables
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z'];
-var blankSpaces = 0;
-var score = 0;
-var guesses = 10;
-var correctGuess = 0;
-var spaces = 0;
-var lettersGuessed = [];
 var animalOptions = ["zebra","giraffe","alligator","elephant","lion","gazelle"];
+var randomAnimal = animalOptions[Math.floor(Math.random() * animalOptions.length)];
+var guessThisAnimal = new WordConstructor(randomAnimal);
+var guesses = 10;
 
-var NewWord = function(array){
-	this.array = array;
-	this.newWord = new Word(array[Math.floor(Math.random() * animalOptions.length)]);
-	console.log("Current Score: " + score);
-}
-
-NewWord.prototype.userLetter = function(){
-	var wordObject = this.newWord;
-	wordObject.displayWord();
-	startGame(wordObject);
-}
-
+//Gameplay
 function startGame(){
 
 	inquirer.prompt([
@@ -36,15 +22,7 @@ function startGame(){
 
 	.then(function(user){
 		var userLetter = user.userLetter;
-
-		for (var i = 0; i < word.animalOptions.length; i ++) {
-			if (word.animalOptions[i].guessed) {
-				thisGuess ++;
-			}
-			if (word.animalOptions[i].space) {
-				blankSpaces ++;
-			}
-		}			
+					
 		if (thisGuess === blankSpaces) {
 			console.log("Nope, sorry!")
 			guesses --;
